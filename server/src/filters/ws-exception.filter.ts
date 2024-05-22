@@ -13,7 +13,6 @@ export class WsExceptionFilter implements ExceptionFilter {
     if (exception instanceof Error) {
       message = exception.message;
     }
-
     client.emit('exception', { message });
   }
 }

@@ -4,10 +4,10 @@
     <form @submit.prevent="handleSubmit">
       <label for="fieldSize">Field Size:</label>
       <input type="number" id="fieldSize" v-model.number="fieldSize" />
-      
+
       <label for="diamonds">Diamonds:</label>
       <input type="number" id="diamonds" v-model.number="diamonds" />
-      
+
       <button type="submit">Create Game</button>
     </form>
   </div>
@@ -43,11 +43,13 @@ const createNewGame = async (fieldSize, diamonds) => {
 };
 
 const handleSubmit = async () => {
-  const data = await createNewGame(fieldSize.value, diamonds.value);
-  router.push({ name: 'gamePlay', params: { gameId: data.id } });
+  try {
+    const data = await createNewGame(fieldSize.value, diamonds.value);
+    router.push({ name: 'gamePlay', params: { gameId: data.id } });
+  } catch (error) {
+    alert(error.response.data.message)
+  }
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

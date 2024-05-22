@@ -1,5 +1,5 @@
 import { generateBoard } from './utils';
-
+// TODO: типизировать ошибки
 export class Game {
   private players: string[] = [];
   private currentPlayerIndex = 0; // TODO: выбирать в случайном порядке
@@ -142,7 +142,7 @@ export class Game {
     return clientBoard;
   }
 }
-
+// TODO: вынести это куда-то в types
 export type ClientGame =
   | {
       id: string;

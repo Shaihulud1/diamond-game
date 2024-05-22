@@ -20,6 +20,9 @@ export class GameService {
     ) {
       throw new Error(`FieldSize is too small`);
     }
+    if (createGameDto.diamonds % 2 === 0) {
+      throw new Error('Diamonds must not be even');
+    }
     const id = (Math.random() + 1).toString(36).substring(7);
     const game = new Game(id, createGameDto.fieldSize, createGameDto.diamonds);
     this.gameStore.setGame(id, game);
@@ -78,9 +81,10 @@ export class GameService {
     if (choosenCell.isPicked) {
       throw new Error(`Cell is already picked`);
     }
-    game.nextTurn();
     if (choosenCell.content === CellContent.Diamond) {
       game.incPlayerScore(player);
+    } else {
+      game.nextTurn();
     }
     game.pickCell(makeMoveDTO.cellY, makeMoveDTO.cellX);
 
